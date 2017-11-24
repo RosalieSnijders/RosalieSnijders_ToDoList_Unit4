@@ -83,6 +83,16 @@ class toDoListTableViewController: UITableViewController, ToDoCellDelegate {
         if let indexPath = tableView.indexPath(for: sender) {
             var todo = todos[indexPath.row]
             todo.isComplete = !todo.isComplete
+            todos[indexPath.row] = todo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            ToDo.saveToDos(todos)
+        }
+    }
+    
+    func completeButtonTapped(sender: ToDoCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var todo = todos[indexPath.row]
+            todo.isComplete = !todo.isComplete
             tableView.reloadRows(at: [indexPath], with: .automatic)
             ToDo.saveToDos(todos)
         }
